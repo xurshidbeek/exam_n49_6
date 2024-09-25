@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+
+   <section class="py-5">
+    <div class="container px-4 px-lg-5 mt-5">
+        <div class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center">
+            {% for product in products %}
+                {% if product.is_sale %}  <!-- Faqat sotiladigan mahsulotlarni ko'rsatamiz -->
+                    <div class="col mb-5">
+                        <div class="card h-100">
+                            <!-- Mahsulot rasmi -->
+                            <img class="card-img-top" src="{{ product.image.url }}" alt="{{ product.name }}" />
+                            <!-- Mahsulot detallar -->
+                            <div class="card-body p-4">
+                                <div class="text-center">
+                                    <!-- Mahsulot nomi -->
+                                    <h5 class="fw-bolder">{{ product.name }}</h5>
+                                    <h5 class="fw-bolder">{{ product.rating }}⭐️</h5>
+                                    <!-- Mahsulot narxi -->
+                                    <span class="text-muted text-decoration-line-through">{{ product.old_price }}</span>
+                                    <p>{{ product.new_price }}</p>
+                                </div>
+                            </div>
+                            <!-- View Product tugmasi -->
+                            <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
+                                <div class="text-center">
+                                    <a class="btn btn-outline-dark mt-auto" href="/detail/{{ product.id }}/">View product</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                {% endif %}
+            {% endfor %}
+        </div>
+    </div>
+</section>
+
+{% endblock content %}
